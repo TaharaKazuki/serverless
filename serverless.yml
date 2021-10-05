@@ -1,24 +1,23 @@
-service:
-  name: serverless
+service: serverless
 
 plugins:
   - serverless-bundle
-  - serverless-pseudo-parameters
 
 provider:
   name: aws
   runtime: nodejs12.x
+  lambdaHashingVersion: 20201221
   memorySize: 256
   stage: ${opt:stage, 'dev'}
   region: ap-northeast-1
 
 functions:
-  hello:
-    handler: src/handlers/hello.handler
+  createAuction:
+    handler: src/handlers/createAuction.handler
     events:
       - http:
-          method: GET
-          path: /hello
+          method: POST
+          path: /createAuction
 
 custom:
   bundle:
